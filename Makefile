@@ -1,13 +1,14 @@
 CC = clang
 CFLAGS = -fsanitize=safe-stack -Wall -Wextra
+BUILD_DIR = build
 
 all: main unsafe
 
-main: main.c
-	$(CC) $(CFLAGS) -o main main.c
+main: examples/main.c
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/examples/main examples/main.c
 
-unsafe: unsafe.c
-	$(CC) -Wall -Wextra -o unsafe unsafe.c
+unsafe: exploits/unsafe.c
+	$(CC) $(CFLAGS) -o $(BUILD_DIR)/exploits/unsafe exploits/unsafe.c
 
 clean:
-	rm -f main unsafe
+	rm -f $(BUILD_DIR)/examples/* $(BUILD_DIR)/exploits/*
